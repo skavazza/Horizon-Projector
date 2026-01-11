@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/horizon" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>

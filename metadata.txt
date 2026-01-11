@@ -1,0 +1,56 @@
+# This file contains metadata for your plugin.
+
+# This file should be included when you package your plugin.# Mandatory items:
+
+[general]
+name=Horizon Projector
+qgisMinimumVersion=3.0
+description=plugion horizon
+version=1.0
+author=Alberto Rodrigues
+email=betorodriuges@msn.com
+
+about=O Horizon Projector é um plugin completo para cálculos náuticos e geodésicos no QGIS. Recursos principais: 1) Cálculo de distância ao horizonte baseado na altura do observador, 2) Cálculo de distância máxima para visualização de objetos, 3) Projeção geodésica via azimute magnético e distância com correção de declinação, 4) Criação de anéis de distância em milhas náuticas com gradiente de cores, 5) Exportação para GPX, KML, Shapefile e GeoJSON. Ideal para navegação marítima, planejamento de rotas, estudos de visibilidade, busca e resgate, e aplicações geodésicas. Todos os cálculos consideram a curvatura da Terra usando fórmulas geodésicas precisas.
+
+
+tracker=https://github.com/skavazza/Horizon-Projector/issues
+repository=https://github.com/skavazza/Porizon-Projector
+# End of mandatory metadata
+
+# Recommended items:
+
+hasProcessingProvider=no
+# Uncomment the following line and add your changelog:
+# changelog=1.0 - Versão inicial
+    - Cálculo de distância ao horizonte
+    - Cálculo de objetos visíveis
+    - Projeção geodésica com azimute e distância
+    - Anéis de distância em milhas náuticas
+    - Exportação para múltiplos formatos
+    - Interface com abas intuitiva
+    - Integração completa com canvas do QGIS
+
+# Tags are comma separated with spaces allowed
+tags=python,nautico,navegacao,horizonte,geodesia,projecao,maritimo,nautical,navigation,horizon,maritime,azimuth,distance,rings
+
+
+homepage=https://github.com/skavazza/Porizon-Projector
+category=Plugins
+icon=icon.png
+# experimental flag
+experimental=False
+
+# deprecated flag (applies to the whole plugin, not just a single version)
+deprecated=False
+
+# Since QGIS 3.8, a comma separated list of plugins to be installed
+# (or upgraded) can be specified.
+# Check the documentation for more information.
+# plugin_dependencies=
+
+Category of the plugin: Raster, Vector, Database or Web
+# category=
+
+# If the plugin can run on QGIS Server.
+server=False
+
