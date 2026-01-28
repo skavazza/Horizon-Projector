@@ -14,7 +14,7 @@ about=O Horizon Projector é um plugin completo para cálculos náuticos e geod�
 
 
 tracker=https://github.com/skavazza/Horizon-Projector/issues
-repository=https://github.com/skavazza/Porizon-Projector
+repository=https://github.com/skavazza/Horizon-Projector
 # End of mandatory metadata
 
 # Recommended items:
@@ -34,7 +34,7 @@ hasProcessingProvider=no
 tags=python,nautico,navegacao,horizonte,geodesia,projecao,maritimo,nautical,navigation,horizon,maritime,azimuth,distance,rings
 
 
-homepage=https://github.com/skavazza/Porizon-Projector
+homepage=https://github.com/skavazza/Horizon-Projector
 category=Plugins
 icon=icon.png
 # experimental flag
