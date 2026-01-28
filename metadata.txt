@@ -5,12 +5,12 @@
 [general]
 name=Horizon Projector
 qgisMinimumVersion=3.0
-description=plugion horizon
+description=O Horizon Projector é um plugin completo para cálculos náuticos e geodésicos no QGIS.
 version=1.0
 author=Alberto Rodrigues
 email=betorodriuges@msn.com
 
-about=O Horizon Projector é um plugin completo para cálculos náuticos e geodésicos no QGIS. Recursos principais:
+about=Recursos principais:
     1) Cálculo de distância ao horizonte baseado na altura do observador,
     2) Cálculo de distância máxima para visualização de objetos,
     3) Projeção geodésica via azimute magnético e distância com correção de declinação,
