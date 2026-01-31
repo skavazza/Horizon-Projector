@@ -15,7 +15,7 @@
 import os
 import math
 from qgis.PyQt import uic
-from qgis.PyQt.QtWidgets import QDialog, QMessageBox, QFileDialog
+from qgis.PyQt.QtWidgets import QApplication, QDialog, QMessageBox, QFileDialog
 from qgis.PyQt.QtCore import pyqtSignal
 from qgis.core import (
     QgsProject, QgsVectorLayer, QgsFeature, QgsGeometry, 
@@ -26,6 +26,8 @@ from qgis.core import (
 from qgis.PyQt.QtCore import QVariant
 from qgis.PyQt.QtGui import QColor
 
+from .captureCoordinate import CaptureCoordinate
+
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'horizon_dialog_base.ui'))
 
@@ -35,8 +37,9 @@ class horizonDialog(QDialog, FORM_CLASS):
     
     # Constantes
     RAIO_TERRA = 6371.0  # km
-    ABROLHOS_LAT = -17.9647
-    ABROLHOS_LNG = -38.6941
+    # Mantido por compatibilidade (botão virou "capturar no mapa").
+    ABROLHOS_LAT = -17.5392
+    ABROLHOS_LNG = -39.7277
     NM_TO_KM = 1.852
     NM_TO_M = 1852.0
     
@@ -49,6 +52,12 @@ class horizonDialog(QDialog, FORM_CLASS):
         
         # Lista para rastrear camadas criadas
         self.created_layers = []
+
+        # Ferramenta para capturar coordenadas no mapa (clique)
+        self._previous_map_tool = None
+        self._capture_tool = CaptureCoordinate(self.canvas)
+        self._capture_tool.capturePoint.connect(self._on_capture_point)
+        self._capture_tool.captureStopped.connect(self._on_capture_stopped)
         
         # Conectar sinais dos botões
         self.connect_signals()
@@ -161,18 +170,51 @@ class horizonDialog(QDialog, FORM_CLASS):
             f"Coordenadas atualizadas:\nLat: {centro.y():.6f}\nLng: {centro.x():.6f}")
     
     def usar_abrolhos(self):
-        """Define as coordenadas padrão de Abrolhos"""
-        self.spinLatitude.setValue(self.ABROLHOS_LAT)
-        self.spinLongitude.setValue(self.ABROLHOS_LNG)
-        self.spinLatitudeObj.setValue(self.ABROLHOS_LAT)
-        self.spinLongitudeObj.setValue(self.ABROLHOS_LNG)
-        self.spinLatitudeProj.setValue(self.ABROLHOS_LAT)
-        self.spinLongitudeProj.setValue(self.ABROLHOS_LNG)
-        self.spinLatitudeAneis.setValue(self.ABROLHOS_LAT)
-        self.spinLongitudeAneis.setValue(self.ABROLHOS_LNG)
-        
-        QMessageBox.information(self, "Sucesso", 
-            "Coordenadas de Abrolhos (BA) aplicadas")
+        """Ativa modo de captura: clique no mapa para preencher coordenadas."""
+        self._previous_map_tool = self.canvas.mapTool()
+        self.canvas.setMapTool(self._capture_tool)
+        QMessageBox.information(
+            self,
+            "Capturar coordenadas",
+            "Clique no mapa para capturar as coordenadas (WGS84).\n"
+            "As coordenadas serão copiadas para a área de transferência e preenchidas nos campos.",
+        )
+
+    def _on_capture_point(self, pt4326):
+        """Recebe ponto capturado (EPSG:4326) e atualiza campos."""
+        lat = float(pt4326.y())
+        lon = float(pt4326.x())
+
+        # Atualizar todos os spin boxes de latitude/longitude
+        self.spinLatitude.setValue(lat)
+        self.spinLongitude.setValue(lon)
+        self.spinLatitudeObj.setValue(lat)
+        self.spinLongitudeObj.setValue(lon)
+        self.spinLatitudeProj.setValue(lat)
+        self.spinLongitudeProj.setValue(lon)
+        self.spinLatitudeAneis.setValue(lat)
+        self.spinLongitudeAneis.setValue(lon)
+
+        # Copiar para clipboard
+        QApplication.clipboard().setText(f"{lat:.6f}, {lon:.6f}")
+
+        # Restaurar ferramenta anterior
+        if self._previous_map_tool is not None:
+            self.canvas.setMapTool(self._previous_map_tool)
+        else:
+            self.canvas.unsetMapTool(self._capture_tool)
+
+        QMessageBox.information(
+            self,
+            "Coordenadas capturadas",
+            f"Lat: {lat:.6f}\nLng: {lon:.6f}\n\n(Copiado para a área de transferência)",
+        )
+
+    def _on_capture_stopped(self):
+        """Quando a ferramenta é desativada sem capturar."""
+        # Se o usuário trocar de ferramenta, tenta restaurar.
+        if self._previous_map_tool is not None and self.canvas.mapTool() == self._capture_tool:
+            self.canvas.setMapTool(self._previous_map_tool)
     
     def calcular_horizonte(self):
         """Calcula a distância ao horizonte"""

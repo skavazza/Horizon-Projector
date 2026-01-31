@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>700</height>
+    <width>428</width>
+    <height>457</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tabHorizonte">
       <attribute name="title">
@@ -49,7 +49,7 @@
              <double>90.000000000000000</double>
             </property>
             <property name="value">
-             <double>-17.539200000000000</double>
+             <double>-17.539200000000001</double>
             </property>
            </widget>
           </item>
@@ -72,7 +72,7 @@
              <double>180.000000000000000</double>
             </property>
             <property name="value">
-             <double>-39.727700000000003</double>
+             <double>-39.727699999999999</double>
             </property>
            </widget>
           </item>
@@ -86,7 +86,7 @@
           <item row="1" column="2" colspan="2">
            <widget class="QPushButton" name="btnUsarAbrolhos">
             <property name="text">
-             <string>Usar Abrolhos (Default)</string>
+             <string>Capturar Coordenadas no Mapa</string>
             </property>
            </widget>
           </item>
@@ -221,7 +221,7 @@
              <double>90.000000000000000</double>
             </property>
             <property name="value">
-             <double>-17.539200000000000</double>
+             <double>-17.539200000000001</double>
             </property>
            </widget>
           </item>
@@ -244,7 +244,7 @@
              <double>180.000000000000000</double>
             </property>
             <property name="value">
-             <double>-39.727700000000003</double>
+             <double>-39.727699999999999</double>
             </property>
            </widget>
           </item>
@@ -402,7 +402,7 @@
              <double>90.000000000000000</double>
             </property>
             <property name="value">
-             <double>-17.539200000000000</double>
+             <double>-17.539200000000001</double>
             </property>
            </widget>
           </item>
@@ -425,7 +425,7 @@
              <double>180.000000000000000</double>
             </property>
             <property name="value">
-             <double>-39.727700000000003</double>
+             <double>-39.727699999999999</double>
             </property>
            </widget>
           </item>
@@ -637,7 +637,7 @@
              <double>90.000000000000000</double>
             </property>
             <property name="value">
-             <double>-17.539200000000000</double>
+             <double>-17.539200000000001</double>
             </property>
            </widget>
           </item>
@@ -660,7 +660,7 @@
              <double>180.000000000000000</double>
             </property>
             <property name="value">
-             <double>-39.727700000000003</double>
+             <double>-39.727699999999999</double>
             </property>
            </widget>
           </item>
